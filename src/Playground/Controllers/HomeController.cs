@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Playground.Controllers
 {
@@ -29,6 +30,14 @@ namespace Playground.Controllers
 
         public IActionResult Error()
         {
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult Profile()
+        {
+            ViewData["Message"] = "Welcome to your profile, here you can preview all data about yourself.";
+
             return View();
         }
     }

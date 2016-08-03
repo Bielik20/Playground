@@ -1,0 +1,64 @@
+﻿@model List<KeyValuePair<string, int>>
+@{
+    ViewData["Title"] = "JS Print";
+}
+
+<!-- To create chart(AJAX API)s: https://developers.google.com/chart/interactive/docs/ -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<!-- To download files via JS: http://danml.com/download.html -->
+<script type="text/javascript" src="http://danml.com/js/download2.js"></script>
+
+<script type="text/javascript">
+
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows
+        ([
+            @foreach (var item in Model)
+            {
+                @Html.Raw("['" + item.Key + "', " + item.Value + "],");
+            }
+        ]);
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+
+        // Set chart options
+        var options = {
+            'title': 'How Much Pizza I Ate Last Night',
+            'width': 400,
+            'height': 300
+        };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart_div = document.getElementById("chart_div");
+        var chart = new google.visualization.PieChart(chart_div);
+
+        document.getElementById("download_button").addEventListener("click", function () {
+            download(chart.getImageURI(), "chart", "image/png");
+        });
+
+        document.getElementById("newtab_button").addEventListener("click", function () {
+            var data = '<img src="' + chart.getImageURI() + '">';
+            myWindow = window.open("data:text/html," + encodeURIComponent(data), "_blank");
+            myWindow.focus();
+        });
+
+        chart.draw(data, options);
+    }
+
+</script>
+
+<div id="chart_div"></div>
+<button class="btn btn-default" id="download_button">Download</button>
+<button class="btn btn-default" id="newtab_button">New Tab</button>
+
+
+
