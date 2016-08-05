@@ -1,0 +1,97 @@
+﻿@model Playground.Models.VisualizationViewModels.BackendPrintViewModel
+@{
+    ViewData["Title"] = "AJAX Test";
+}
+
+<h2>@ViewData["Title"].</h2>
+<p>This is site for testing AJAX.</p>
+
+<!-- To create chart(AJAX API)s: https://developers.google.com/chart/interactive/docs/ -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+    function getText() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                document.getElementById("plain_text").innerHTML = xhttp.responseText;
+            }
+        };
+        xhttp.open("GET", "/AjaxTest/GetText", true);
+        xhttp.send();
+    }
+
+    function getTextNumber(number) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                document.getElementById("text_number").innerHTML = xhttp.responseText;
+            }
+        };
+        xhttp.open("GET", "/AjaxTest/GetTextWithNumber?number=" + number, true);
+        xhttp.send();
+    }
+
+    function showHint(str) {
+        if (str.length == 0) {
+            document.getElementById("txtHint").innerHTML = "";
+            return;
+        } else {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+                }
+            };
+            xmlhttp.open("GET", "/AjaxTest/GetHint?text=" + str, true);
+            xmlhttp.send();
+        }
+    }
+
+    function showHintList(str) {
+        if (str.length == 0) {
+            return;
+        } else {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById("meals_list").innerHTML = xmlhttp.responseText;
+                }
+            };
+            xmlhttp.open("GET", "/AjaxTest/GetHintList?text=" + str, true);
+            xmlhttp.send();
+        }
+    }
+
+</script>
+
+<br />
+<button style="float:left;margin-right:10px" class="btn btn-default" type="button" onclick="getText()">Request data</button>
+<label id="plain_text"></label>
+<br /><br />
+
+<br />
+<input style="float:left;margin-right:10px" id="number_input" class="form-control" />
+<button style="float:left;margin-right:10px" class="btn btn-default" type="button" onclick="getTextNumber( document.getElementById('number_input').value)">Request data with number</button>
+<label id="text_number"></label>
+<br /><br />
+
+<br />
+<form>
+    Meal: <input class="form-control" type="text" onkeyup="showHint(this.value)" />
+</form>
+<p>Suggestions: <span id="txtHint"></span></p>
+
+<br />
+<form>
+    Meal: 
+    <input list="meals_list" class="form-control" type="text" onkeyup="showHintList(this.value)" />
+    <datalist id="meals_list">
+        <option value="Internet Explorer" />
+        <option value="Firefox" />
+        <option value="Chrome" />
+        <option value="Opera" />
+        <option value="Safari" />
+    </datalist>
+</form>
+

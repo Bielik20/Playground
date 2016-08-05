@@ -7,8 +7,7 @@ namespace Playground.Models.VisualizationViewModels
 {
     public class BackendPrintViewModel
     {
-        public List<KeyValuePair<string, int>> List { get; set; }
-
+        public List<Meal> List { get; set; }
         public string ImageURI { get; set; }
     }
 }

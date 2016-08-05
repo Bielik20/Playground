@@ -20,7 +20,7 @@
         ([
             @foreach (var item in Model.List)
             {
-                @Html.Raw("['" + item.Key + "', " + item.Value + "],");
+                @Html.Raw("['" + item.Name + "', " + item.Count + "],");
             }
         ]);
         data.addColumn('string', 'Topping');
@@ -48,7 +48,7 @@
 
 <div id="chart_div"></div>
 
-<form asp-action="Edit">
+<form asp-action="PrintImage">
     <input id="chart_input" type="hidden" asp-for="ImageURI" /> <br />
     <button class="btn btn-default" type="submit">Register</button>
 </form>

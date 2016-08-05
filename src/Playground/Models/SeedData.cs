@@ -15,12 +15,19 @@ namespace Playground.Models
             using (var context = new ApplicationDbContext(
                 serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
-                // Look for any Userss.
-                if (context.Users.Any())
+                if (context.Meal.Any())
                 {
-                    System.Console.WriteLine("in seed data n\n\n\n\n\n\n\n\n");
-                    return;   // DB has been seeded
+                    return;
                 }
+
+                context.Meal.AddRange
+                (
+                    new Meal { Name = "Mushrooms", Count = 3, },
+                    new Meal { Name = "Onios", Count = 1,},
+                    new Meal { Name = "Olives", Count = 1, },
+                    new Meal { Name = "Zucchini", Count = 1, },
+                    new Meal { Name = "Pepperoni", Count = 2, }
+                );
 
                 context.SaveChanges();
             }
