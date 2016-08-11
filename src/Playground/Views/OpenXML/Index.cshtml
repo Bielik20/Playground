@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "Open XML";
+}
+
+<h2>@ViewData["Title"].</h2>
+<p>This is site for testing Open XML SDK.</p>
+
+
+<form asp-action="DownloadFile" asp-controller="OpenXML" enctype="multipart/form-data">
+    <input type="submit" value="Download" class="btn btn-default" />
+</form>
+
+<form method="post" asp-action="UploadFile" asp-controller="OpenXML" enctype="multipart/form-data">
+    <input type="file" name="files" multiple/>
+    <input type="submit" value="Upload" class="btn btn-default" />
+</form>
+
+<form asp-action="CreatePP" asp-controller="OpenXML" enctype="multipart/form-data">
+    <input type="submit" value="Download PP" class="btn btn-default" />
+</form>

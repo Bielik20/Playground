@@ -1,7 +1,8 @@
-﻿{
+{
   "userSecretsId": "aspnet-Playground-e648567f-e37a-42e9-a9d4-0d7bc5e1e340",
 
   "dependencies": {
+    "DocumentFormat.OpenXml": "2.5.0",
     "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
@@ -57,7 +58,11 @@
   },
 
   "frameworks": {
-    "net452": { }
+    "net452": {
+      "frameworkAssemblies": {
+        "WindowsBase": "4.0.0.0"
+      }
+    }
   },
 
   "buildOptions": {

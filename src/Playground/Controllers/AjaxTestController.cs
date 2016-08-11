@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Playground.Data;
 using System.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Playground.Controllers
 {
@@ -44,7 +45,7 @@ namespace Playground.Controllers
                 return "No meal found.";
         }
 
-        public string GetHintList(string text)
+        public async Task<string> GetHintList(string text)
         {
             var meal = from m in _context.Meal
                        where m.Name.StartsWith(text)
@@ -53,7 +54,7 @@ namespace Playground.Controllers
             var builder = new System.Text.StringBuilder();
             if (meal.Any())
             {
-                foreach (var item in meal.ToList())
+                foreach (var item in await meal.ToListAsync())
                 {
                     builder.Append(String.Format("<option value='{0}'>", item.Name));
                 }
@@ -61,6 +62,16 @@ namespace Playground.Controllers
             }
 
             return "";
+        }
+
+        public IActionResult AjaxPage()
+        {
+            return PartialView();
+        }
+
+        public IActionResult AjaxHomePage()
+        {
+            return PartialView("../Home/Index");
         }
     }
 }

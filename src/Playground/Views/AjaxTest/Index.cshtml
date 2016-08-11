@@ -6,8 +6,6 @@
 <h2>@ViewData["Title"].</h2>
 <p>This is site for testing AJAX.</p>
 
-<!-- To create chart(AJAX API)s: https://developers.google.com/chart/interactive/docs/ -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
     function getText() {
@@ -50,6 +48,7 @@
 
     function showHintList(str) {
         if (str.length == 0) {
+            document.getElementById("meals_list").innerHTML = "";
             return;
         } else {
             var xmlhttp = new XMLHttpRequest();
@@ -61,6 +60,28 @@
             xmlhttp.open("GET", "/AjaxTest/GetHintList?text=" + str, true);
             xmlhttp.send();
         }
+    }
+
+    function getPage() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                document.getElementById("ajax_page").innerHTML = xhttp.responseText;
+            }
+        };
+        xhttp.open("GET", "/AjaxTest/AjaxPage", true);
+        xhttp.send();
+    }
+
+    function getHomePage() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                document.getElementById("ajax_page").innerHTML = xhttp.responseText;
+            }
+        };
+        xhttp.open("GET", "/AjaxTest/AjaxHomePage", true);
+        xhttp.send();
     }
 
 </script>
@@ -87,11 +108,15 @@
     Meal: 
     <input list="meals_list" class="form-control" type="text" onkeyup="showHintList(this.value)" />
     <datalist id="meals_list">
-        <option value="Internet Explorer" />
-        <option value="Firefox" />
-        <option value="Chrome" />
-        <option value="Opera" />
-        <option value="Safari" />
+        <option value="Test 1" />
+        <option value="Test 2" />
+        <option value="Test 3" />
     </datalist>
 </form>
 
+<br />
+<button style="float:left;margin-right:10px" class="btn btn-default" type="button" onclick="getPage()">Request Page</button>
+<button style="float:left;margin-right:10px" class="btn btn-default" type="button" onclick="getHomePage()">Request Home Page</button>
+<br /><br />
+<div id="ajax_page"></div>
+<br />
