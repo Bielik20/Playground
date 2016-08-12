@@ -7,11 +7,20 @@ using Ap = DocumentFormat.OpenXml.ExtendedProperties;
 using Vt = DocumentFormat.OpenXml.VariantTypes;
 using System.IO;
 using System.Threading.Tasks;
+using Playground.Data;
+using System.Linq;
 
 namespace Playground.Services
 {
     public class PowerPointCreator
     {
+        private readonly ApplicationDbContext _context;
+
+        public PowerPointCreator(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         // Creates a PresentationDocument.
         public async Task<byte[]> CreatePackage()
         {
@@ -36,6 +45,7 @@ namespace Playground.Services
             GenerateSlidePart1Content(slidePart1);
 
             ChartPart chartPart1 = slidePart1.AddNewPart<ChartPart>("rId2");
+            //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
             GenerateChartPart1Content(chartPart1);
 
             EmbeddedPackagePart embeddedPackagePart1 = chartPart1.AddNewPart<EmbeddedPackagePart>("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "rId1");
@@ -533,6 +543,8 @@ namespace Playground.Services
             C.Index index1 = new C.Index() { Val = (UInt32Value)0U };
             C.Order order1 = new C.Order() { Val = (UInt32Value)0U };
 
+            //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
             C.SeriesText seriesText1 = new C.SeriesText();
 
             C.StringReference stringReference1 = new C.StringReference();
@@ -544,7 +556,7 @@ namespace Playground.Services
 
             C.StringPoint stringPoint1 = new C.StringPoint() { Index = (UInt32Value)0U };
             C.NumericValue numericValue1 = new C.NumericValue();
-            numericValue1.Text = "Sales";
+            numericValue1.Text = "Meals";
 
             stringPoint1.Append(numericValue1);
 
@@ -556,44 +568,26 @@ namespace Playground.Services
 
             seriesText1.Append(stringReference1);
 
+            //Get meals
+            var meals = _context.Meal.ToList();
+
             C.CategoryAxisData categoryAxisData1 = new C.CategoryAxisData();
 
             C.StringReference stringReference2 = new C.StringReference();
             C.Formula formula2 = new C.Formula();
-            formula2.Text = "Sheet1!$A$2:$A$5";
+            formula2.Text = "Sheet1!$A$2:$A$" + meals.Count + 2; //Getting number of meals
 
             C.StringCache stringCache2 = new C.StringCache();
-            C.PointCount pointCount2 = new C.PointCount() { Val = (UInt32Value)4U };
+            C.PointCount pointCount2 = new C.PointCount() { Val = (uint) meals.Count() };
 
-            C.StringPoint stringPoint2 = new C.StringPoint() { Index = (UInt32Value)0U };
-            C.NumericValue numericValue2 = new C.NumericValue();
-            numericValue2.Text = "1st Qtr";
-
-            stringPoint2.Append(numericValue2);
-
-            C.StringPoint stringPoint3 = new C.StringPoint() { Index = (UInt32Value)1U };
-            C.NumericValue numericValue3 = new C.NumericValue();
-            numericValue3.Text = "2nd Qtr";
-
-            stringPoint3.Append(numericValue3);
-
-            C.StringPoint stringPoint4 = new C.StringPoint() { Index = (UInt32Value)2U };
-            C.NumericValue numericValue4 = new C.NumericValue();
-            numericValue4.Text = "3rd Qtr";
-
-            stringPoint4.Append(numericValue4);
-
-            C.StringPoint stringPoint5 = new C.StringPoint() { Index = (UInt32Value)3U };
-            C.NumericValue numericValue5 = new C.NumericValue();
-            numericValue5.Text = "4th Qtr";
-
-            stringPoint5.Append(numericValue5);
-
-            stringCache2.Append(pointCount2);
-            stringCache2.Append(stringPoint2);
-            stringCache2.Append(stringPoint3);
-            stringCache2.Append(stringPoint4);
-            stringCache2.Append(stringPoint5);
+            for (int i = 0; i < meals.Count; i++)
+            {
+                C.StringPoint stringPoint = new C.StringPoint() { Index = (uint) i };
+                C.NumericValue numericValue = new C.NumericValue();
+                numericValue.Text = meals[i].Name;
+                stringPoint.Append(numericValue);
+                stringCache2.Append(stringPoint);
+            }
 
             stringReference2.Append(formula2);
             stringReference2.Append(stringCache2);
@@ -604,46 +598,29 @@ namespace Playground.Services
 
             C.NumberReference numberReference1 = new C.NumberReference();
             C.Formula formula3 = new C.Formula();
-            formula3.Text = "Sheet1!$B$2:$B$5";
+            formula3.Text = "Sheet1!$B$2:$B$" + meals.Count + 2; ;
 
             C.NumberingCache numberingCache1 = new C.NumberingCache();
             C.FormatCode formatCode1 = new C.FormatCode();
             formatCode1.Text = "General";
-            C.PointCount pointCount3 = new C.PointCount() { Val = (UInt32Value)4U };
+            C.PointCount pointCount3 = new C.PointCount() { Val = (uint) meals.Count() };
 
-            C.NumericPoint numericPoint1 = new C.NumericPoint() { Index = (UInt32Value)0U };
-            C.NumericValue numericValue6 = new C.NumericValue();
-            numericValue6.Text = "8.1999999999999993";
-
-            numericPoint1.Append(numericValue6);
-
-            C.NumericPoint numericPoint2 = new C.NumericPoint() { Index = (UInt32Value)1U };
-            C.NumericValue numericValue7 = new C.NumericValue();
-            numericValue7.Text = "3.2";
-
-            numericPoint2.Append(numericValue7);
-
-            C.NumericPoint numericPoint3 = new C.NumericPoint() { Index = (UInt32Value)2U };
-            C.NumericValue numericValue8 = new C.NumericValue();
-            numericValue8.Text = "1.4";
-
-            numericPoint3.Append(numericValue8);
-
-            C.NumericPoint numericPoint4 = new C.NumericPoint() { Index = (UInt32Value)3U };
-            C.NumericValue numericValue9 = new C.NumericValue();
-            numericValue9.Text = "1.2";
-
-            numericPoint4.Append(numericValue9);
+            for (int i = 0; i < meals.Count; i++)
+            {
+                C.NumericPoint numericPoint = new C.NumericPoint() { Index = (uint)i };
+                C.NumericValue numericValue = new C.NumericValue();
+                numericValue.Text = meals[i].Count.ToString();
+                numericPoint.Append(numericValue);
+                numberingCache1.Append(numericPoint);
+            }
 
             numberingCache1.Append(formatCode1);
             numberingCache1.Append(pointCount3);
-            numberingCache1.Append(numericPoint1);
-            numberingCache1.Append(numericPoint2);
-            numberingCache1.Append(numericPoint3);
-            numberingCache1.Append(numericPoint4);
 
             numberReference1.Append(formula3);
             numberReference1.Append(numberingCache1);
+
+            //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
             values1.Append(numberReference1);
 
