@@ -15,12 +15,12 @@ namespace Playground.Controllers
     public class OpenXMLController : Controller
     {
         private IHostingEnvironment _environment;
-        private ApplicationDbContext _context;
+        private PowerPointCreator _creator;
 
-        public OpenXMLController(IHostingEnvironment environment, ApplicationDbContext context)
+        public OpenXMLController(IHostingEnvironment environment, ApplicationDbContext context, PowerPointCreator creator)
         {
             _environment = environment;
-            _context = context;
+            _creator = creator;
         }
 
         public IActionResult Index()
@@ -61,8 +61,7 @@ namespace Playground.Controllers
 
         public async Task<FileResult> CreatePP()
         {
-            var creator = new PowerPointCreator(_context);
-            return File(await creator.CreatePackage(), "application/force-download", "myPresentation.pptx");
+            return File(await _creator.CreatePackage(), "application/force-download", "myPresentation.pptx");
         }
     }
 }

@@ -921,7 +921,7 @@ namespace Playground.Services
             runProperties9.SetAttribute(new OpenXmlAttribute("", "smtClean", "", "0"));
             A.ParagraphProperties paragraphProperties7 = new A.ParagraphProperties();
             A.Text text9 = new A.Text();
-            text9.Text = "2016-08-11";
+            text9.Text = System.DateTime.Now.ToShortDateString();
 
             field1.Append(runProperties9);
             field1.Append(paragraphProperties7);
@@ -1366,7 +1366,7 @@ namespace Playground.Services
             runProperties17.SetAttribute(new OpenXmlAttribute("", "smtClean", "", "0"));
             A.ParagraphProperties paragraphProperties14 = new A.ParagraphProperties();
             A.Text text17 = new A.Text();
-            text17.Text = "2016-08-11";
+            text17.Text = System.DateTime.Now.ToShortDateString();
 
             field3.Append(runProperties17);
             field3.Append(paragraphProperties14);
@@ -2537,7 +2537,7 @@ namespace Playground.Services
             runProperties26.SetAttribute(new OpenXmlAttribute("", "smtClean", "", "0"));
             A.ParagraphProperties paragraphProperties22 = new A.ParagraphProperties();
             A.Text text26 = new A.Text();
-            text26.Text = "2016-08-11";
+            text26.Text = System.DateTime.Now.ToShortDateString();
 
             field5.Append(runProperties26);
             field5.Append(paragraphProperties22);
@@ -3038,7 +3038,7 @@ namespace Playground.Services
             runProperties30.SetAttribute(new OpenXmlAttribute("", "smtClean", "", "0"));
             A.ParagraphProperties paragraphProperties25 = new A.ParagraphProperties();
             A.Text text30 = new A.Text();
-            text30.Text = "2016-08-11";
+            text30.Text = System.DateTime.Now.ToShortDateString();
 
             field7.Append(runProperties30);
             field7.Append(paragraphProperties25);
@@ -3232,7 +3232,7 @@ namespace Playground.Services
             runProperties32.SetAttribute(new OpenXmlAttribute("", "smtClean", "", "0"));
             A.ParagraphProperties paragraphProperties27 = new A.ParagraphProperties();
             A.Text text32 = new A.Text();
-            text32.Text = "2016-08-11";
+            text32.Text = System.DateTime.Now.ToShortDateString();
 
             field9.Append(runProperties32);
             field9.Append(paragraphProperties27);
@@ -4288,7 +4288,7 @@ namespace Playground.Services
             runProperties36.SetAttribute(new OpenXmlAttribute("", "smtClean", "", "0"));
             A.ParagraphProperties paragraphProperties29 = new A.ParagraphProperties();
             A.Text text36 = new A.Text();
-            text36.Text = "2016-08-11";
+            text36.Text = System.DateTime.Now.ToShortDateString();
 
             field11.Append(runProperties36);
             field11.Append(paragraphProperties29);
@@ -4530,7 +4530,7 @@ namespace Playground.Services
             runProperties39.SetAttribute(new OpenXmlAttribute("", "smtClean", "", "0"));
             A.ParagraphProperties paragraphProperties31 = new A.ParagraphProperties();
             A.Text text39 = new A.Text();
-            text39.Text = "2016-08-11";
+            text39.Text = System.DateTime.Now.ToShortDateString();
 
             field13.Append(runProperties39);
             field13.Append(paragraphProperties31);
@@ -4909,7 +4909,7 @@ namespace Playground.Services
             runProperties47.SetAttribute(new OpenXmlAttribute("", "smtClean", "", "0"));
             A.ParagraphProperties paragraphProperties38 = new A.ParagraphProperties();
             A.Text text47 = new A.Text();
-            text47.Text = "2016-08-11";
+            text47.Text = System.DateTime.Now.ToShortDateString();
 
             field15.Append(runProperties47);
             field15.Append(paragraphProperties38);
@@ -5791,7 +5791,7 @@ namespace Playground.Services
             runProperties62.SetAttribute(new OpenXmlAttribute("", "smtClean", "", "0"));
             A.ParagraphProperties paragraphProperties52 = new A.ParagraphProperties();
             A.Text text62 = new A.Text();
-            text62.Text = "2016-08-11";
+            text62.Text = System.DateTime.Now.ToShortDateString();
 
             field17.Append(runProperties62);
             field17.Append(paragraphProperties52);
@@ -6154,7 +6154,7 @@ namespace Playground.Services
             runProperties70.SetAttribute(new OpenXmlAttribute("", "smtClean", "", "0"));
             A.ParagraphProperties paragraphProperties59 = new A.ParagraphProperties();
             A.Text text70 = new A.Text();
-            text70.Text = "2016-08-11";
+            text70.Text = System.DateTime.Now.ToShortDateString();
 
             field19.Append(runProperties70);
             field19.Append(paragraphProperties59);
@@ -6764,7 +6764,7 @@ namespace Playground.Services
             runProperties83.SetAttribute(new OpenXmlAttribute("", "smtClean", "", "0"));
             A.ParagraphProperties paragraphProperties71 = new A.ParagraphProperties();
             A.Text text83 = new A.Text();
-            text83.Text = "2016-08-11";
+            text83.Text = System.DateTime.Now.ToShortDateString();
 
             field21.Append(runProperties83);
             field21.Append(paragraphProperties71);
@@ -7278,7 +7278,7 @@ namespace Playground.Services
             runProperties87.SetAttribute(new OpenXmlAttribute("", "smtClean", "", "0"));
             A.ParagraphProperties paragraphProperties74 = new A.ParagraphProperties();
             A.Text text87 = new A.Text();
-            text87.Text = "2016-08-11";
+            text87.Text = System.DateTime.Now.ToShortDateString();
 
             field23.Append(runProperties87);
             field23.Append(paragraphProperties74);
@@ -7772,14 +7772,15 @@ namespace Playground.Services
             extendedFilePropertiesPart1.Properties = properties1;
         }
 
+        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         private void SetPackageProperties(OpenXmlPackage document)
         {
-            document.PackageProperties.Creator = "Damian Bielecki";
-            document.PackageProperties.Title = "My Title";
-            document.PackageProperties.Revision = "3";
-            document.PackageProperties.Created = System.Xml.XmlConvert.ToDateTime("2016-08-11T16:14:28Z", System.Xml.XmlDateTimeSerializationMode.RoundtripKind);
-            document.PackageProperties.Modified = System.Xml.XmlConvert.ToDateTime("2016-08-11T16:20:11Z", System.Xml.XmlDateTimeSerializationMode.RoundtripKind);
-            document.PackageProperties.LastModifiedBy = "db460597";
+            //document.PackageProperties.Creator = "Damian Bielecki";
+            //document.PackageProperties.Title = "My Title";
+            //document.PackageProperties.Revision = "3";
+            //document.PackageProperties.Created = System.Xml.XmlConvert.ToDateTime("2016-08-11T16:14:28Z", System.Xml.XmlDateTimeSerializationMode.RoundtripKind);
+            //document.PackageProperties.Modified = System.Xml.XmlConvert.ToDateTime("2016-08-11T16:20:11Z", System.Xml.XmlDateTimeSerializationMode.RoundtripKind);
+            //document.PackageProperties.LastModifiedBy = "db460597";
         }
 
         #region Binary Data
