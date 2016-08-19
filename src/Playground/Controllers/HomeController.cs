@@ -40,5 +40,10 @@ namespace Playground.Controllers
 
             return View();
         }
+
+        public IActionResult PlaygroundList()
+        {
+            return View();
+        }
     }
 }

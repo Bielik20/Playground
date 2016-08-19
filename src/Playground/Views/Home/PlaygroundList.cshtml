@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Playground List";
+}
+
+<div class="row">
+
+    <div class="col-md-3">
+        <h2>Authentication</h2>
+        <ul>
+            <li><a asp-area="" asp-controller="Home" asp-action="Profile">Profile</a></li>
+            <li><a asp-area="" asp-controller="UserList" asp-action="Index">User List</a></li>
+            <li><a asp-area="" asp-controller="RolesManager" asp-action="Index">Roles Manager</a></li>
+        </ul>
+    </div>
+
+    <div class="col-md-3">
+        <h2>Microsoft Office</h2>
+        <ul>
+            <li><a asp-area="" asp-controller="Visualization" asp-action="Index">Visualization</a></li>
+            <li><a asp-area="" asp-controller="OpenXML" asp-action="Index">Open XML</a></li>
+        </ul>
+    </div>
+
+    <div class="col-md-3">
+        <h2>Other</h2>
+        <ul>
+            <li><a asp-area="" asp-controller="AjaxTest" asp-action="Index">Ajax Test</a></li>
+        </ul>
+    </div>
+
+</div>
