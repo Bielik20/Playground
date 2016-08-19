@@ -1,0 +1,11 @@
+﻿@model Meal
+
+<input type="hidden" asp-for="ID" />
+<td>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger" />
+</td>
+<td>
+    <input asp-for="Count" class="form-control" />
+    <span asp-validation-for="Count" class="text-danger" />
+</td>

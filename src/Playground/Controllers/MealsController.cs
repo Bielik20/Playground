@@ -25,6 +25,21 @@ namespace Playground.Controllers
             return View(await _context.Meal.ToListAsync());
         }
 
+        public async Task<IActionResult> EditList()
+        {
+            return View(await _context.Meal.ToListAsync());
+        }
+
+        [HttpPost, ActionName("EditList")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditList(IEnumerable<Meal> mealList)
+        {
+            _context.Meal.UpdateRange(mealList);
+            await _context.SaveChangesAsync();
+
+            return View(await _context.Meal.ToListAsync());
+        }
+
         // GET: Meals/Details/5
         public async Task<IActionResult> Details(int? id)
         {
