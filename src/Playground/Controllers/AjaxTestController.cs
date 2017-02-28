@@ -73,5 +73,15 @@ namespace Playground.Controllers
         {
             return PartialView("../Home/Index");
         }
+
+        public async Task<string> AnyPage(string url)
+        {
+            string webPage;
+            using (var wc = new System.Net.WebClient())
+            {
+                webPage = await wc.DownloadStringTaskAsync(url);
+            }
+            return webPage;
+        }
     }
 }

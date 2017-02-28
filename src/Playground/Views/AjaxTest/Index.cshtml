@@ -6,86 +6,6 @@
 <h2>@ViewData["Title"].</h2>
 <p>This is site for testing AJAX.</p>
 
-<script type="text/javascript">
-
-    function getText() {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                document.getElementById("plain_text").innerHTML = xhttp.responseText;
-            }
-        };
-        xhttp.open("GET", "/AjaxTest/GetText", true);
-        xhttp.send();
-    }
-
-    function getTextNumber(number) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                document.getElementById("text_number").innerHTML = xhttp.responseText;
-            }
-        };
-        xhttp.open("GET", "/AjaxTest/GetTextWithNumber?number=" + number, true);
-        xhttp.send();
-    }
-
-    function showHint(str) {
-        if (str.length == 0) {
-            document.getElementById("txtHint").innerHTML = "";
-            return;
-        } else {
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-                }
-            };
-            xmlhttp.open("GET", "/AjaxTest/GetHint?text=" + str, true);
-            xmlhttp.send();
-        }
-    }
-
-    function showHintList(str) {
-        if (str.length == 0) {
-            document.getElementById("meals_list").innerHTML = "";
-            return;
-        } else {
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    document.getElementById("meals_list").innerHTML = xmlhttp.responseText;
-                }
-            };
-            xmlhttp.open("GET", "/AjaxTest/GetHintList?text=" + str, true);
-            xmlhttp.send();
-        }
-    }
-
-    function getPage() {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                document.getElementById("ajax_page").innerHTML = xhttp.responseText;
-            }
-        };
-        xhttp.open("GET", "/AjaxTest/AjaxPage", true);
-        xhttp.send();
-    }
-
-    function getHomePage() {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                document.getElementById("ajax_page").innerHTML = xhttp.responseText;
-            }
-        };
-        xhttp.open("GET", "/AjaxTest/AjaxHomePage", true);
-        xhttp.send();
-    }
-
-</script>
-
 <br />
 <button style="float:left;margin-right:10px" class="btn btn-default" type="button" onclick="getText()">Request data</button>
 <label id="plain_text"></label>
@@ -117,6 +37,11 @@
 <br />
 <button style="float:left;margin-right:10px" class="btn btn-default" type="button" onclick="getPage()">Request Page</button>
 <button style="float:left;margin-right:10px" class="btn btn-default" type="button" onclick="getHomePage()">Request Home Page</button>
+<br /><br />
+<form class="form-inline">
+    <input class="form-control" type="text" id="webURL" placeholder="Type URL" />
+    <button class="btn btn-default" type="button" onclick="getAnyPage()">Any Page</button>
+</form>
 <br /><br />
 <div id="ajax_page"></div>
 <br />
